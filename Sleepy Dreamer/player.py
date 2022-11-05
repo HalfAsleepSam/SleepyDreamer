@@ -3,15 +3,16 @@ import pygame
 class Player():
 
 
-    def __init__(self, x, y, colour, speed, health):
+    def __init__(self, x, y, colour, speed, health, slot, inventory):
         self.player_down = pygame.image.load('assets/player/player_dir-down.png')
         self.player_up = pygame.image.load('assets/player/player_dir-up.png')
         self.player_left = pygame.image.load('assets/player/player_dir-left.png')
         self.player_right = pygame.image.load('assets/player/player_dir-right.png')
-
-
+        self.items = inventory
         #self.pain
-        self.health = health
+        self.cur_item = self.items[0]
+        self.slot = slot
+        self.hp = health
         self.speed = speed
         self.width = 44
         self.height = 120
@@ -21,9 +22,29 @@ class Player():
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.center = (x, y)
 
+    def inv(self):
+        if self.slot:
+            if self.slot == 0:
+                self.cur_item = 0
+            if self.slot == 1:
+                self.cur_item = 1
+            if self.slot == 2:
+                self.cur_item = 2
+            if self.slot == 3:
+                self.cur_item = 3
+            if self.slot == 4:
+                self.cur_item = 4
+    
+                
+
+    def damage(self, damage):
+        self.health -= damage
+
+    def health(self):
+        if self.hp == 0:
+            pass
 
     def move(self):
-        
         #get them clicci keys
         key = pygame.key.get_pressed() # down = 0, up = 1, left = 2, right = 3
         if key:
@@ -40,7 +61,6 @@ class Player():
                 self.rect.y += self.speed
                 self.direction = 1 # down   
 
-     
     def draw(self, screen):
 
         if self.direction:
