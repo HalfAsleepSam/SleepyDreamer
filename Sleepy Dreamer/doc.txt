@@ -1,0 +1,7 @@
+This file explains formatting for this game (engine?).
+
+imports
+If you are importing a class file always import it under the #class imports section of the file, and format the import line as  : import class_item as c_item
+
+variables
+file variables - variables used to access or load files should have their names formatted as file_filename
